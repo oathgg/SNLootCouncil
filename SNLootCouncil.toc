@@ -1,0 +1,25 @@
+## Interface: 11305
+## Title: Supernova Loot Council
+## Author: Okrah - Skullflame EU
+## Version: 1.0.0
+# SavedVariablesPerCharacter: 
+## SavedVariables: SAVED_ALL_ITEMS
+
+Core.lua
+
+Libs\embeds.xml
+
+Templates\SN_ItemListFrame.xml
+
+Helpers\UIHelper.lua
+Helpers\TableHelper.lua
+
+Utils\SN_ChatReader.lua
+
+Models\SN_Item.lua
+
+GUI\SN_ItemList.lua
+GUI\SN_ItemOwner.lua
+GUI\SN_Report.lua
+
+Extensions\SN_SlashCommands.lua
