@@ -1,9 +1,7 @@
 function addonCommand(command)
     if      command == "show"   then SN_ItemList:Show()
     elseif  command == "reset"  then SN_ItemList:Reset()
-    elseif  command == "start"  then SN_ChatReader:Start()
-    elseif  command == "stop"   then SN_ChatReader:Stop()
-    else                             SN:PrintMsg("Unrecognized command '"..command.."'.")
+    else                             SN:PrintMsg("Available commands are:\n/sn show - Starts tracking and shows loot being distributed.\n/sn reset - Resets the list of loot being distributed.")
     end
 end
 
