@@ -13,6 +13,7 @@ Templates\SN_ItemListFrame.xml
 
 Helpers\UIHelper.lua
 Helpers\TableHelper.lua
+Helpers\LuaHelper.lua
 
 Utils\SN_ChatReader.lua
 
