@@ -29,7 +29,7 @@ end
 
 function SN_Item:GetItemByNameWithoutOwner(name)
     for k, item in pairs(SAVED_ALL_ITEMS) do
-        if item.Name == name and item.Owner == nil then
+        if item.Name == name and (item.Owner == nil or item.Owner == "") then
             return k
         end
     end

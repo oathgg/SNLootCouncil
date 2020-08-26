@@ -11,6 +11,8 @@ function OnTradeSuccess(...)
         if itemId then
             SN_Item:AssignOwner(itemId, targetPlayer)
             SN:PrintMsg("Traded "..itemName.." to "..targetPlayer)
+        else
+            SN:PrintMsg("Couldn't find an ownerless item with name "..itemName)
         end
     end
 end
