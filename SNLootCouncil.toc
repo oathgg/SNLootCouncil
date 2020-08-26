@@ -16,6 +16,7 @@ Helpers\TableHelper.lua
 Helpers\LuaHelper.lua
 
 Utils\SN_ChatReader.lua
+Utils\SN_TradeTracker.lua
 
 Models\SN_Item.lua
 
@@ -24,3 +25,5 @@ GUI\SN_ItemOwner.lua
 GUI\SN_Report.lua
 
 Extensions\SN_SlashCommands.lua
+
+SN_ItemTracker.lua

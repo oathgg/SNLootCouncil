@@ -27,6 +27,15 @@ function SN_Item:Get(internalItemId)
     return SAVED_ALL_ITEMS[internalItemId]
 end
 
+function SN_Item:GetItemByNameWithoutOwner(name)
+    for k, item in pairs(SAVED_ALL_ITEMS) do
+        if item.Name == name and item.Owner == nil then
+            return k
+        end
+    end
+end
+
 function SN_Item:Reset()
+    SN:PrintMsg("Cleared item list")
     SAVED_ALL_ITEMS = {}
 end

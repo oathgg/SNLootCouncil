@@ -129,8 +129,6 @@ local function CreateTable()
 end
 
 local function CreateGUI()
-    SN_ChatReader:Start()
-
     mainFrame = AceGUI:Create("Frame", UIParent)
     mainFrame:Hide()
     _G["AAAA_ItemList"] = mainFrame
@@ -146,13 +144,13 @@ local function CreateGUI()
     mainFrame:AddChild(reportBtn)
 
     CreateTable()
-
-    mainFrame.frame:SetScript("OnHide", function() SN_ChatReader:Stop() end)
 end
 
 function SN_ItemList:ForceUpdate()
-    BuildTableContent()
-    Update()
+    if mainFrame then
+        BuildTableContent()
+        Update()
+    end
 end
 
 function SN_ItemList:IsShown()

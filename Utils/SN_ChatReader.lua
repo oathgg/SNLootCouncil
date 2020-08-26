@@ -8,8 +8,6 @@ local ENABLED = false
 
 function SN_ChatReader:Start()
     if not ENABLED then
-        SN:PrintMsg("Enabled.")
-        
         EVENTS:RegisterEvent(CHAT_MSG_RAID)
         EVENTS:RegisterEvent(CHAT_MSG_RAID_LEADER)
         EVENTS:RegisterEvent(CHAT_MSG_RAID_WARNING)
@@ -20,8 +18,6 @@ end
 
 function SN_ChatReader:Stop()
     if ENABLED then
-        SN:PrintMsg("Disabled.")
-
         EVENTS:UnregisterEvent(CHAT_MSG_RAID)
         EVENTS:UnregisterEvent(CHAT_MSG_RAID_LEADER)
         EVENTS:UnregisterEvent(CHAT_MSG_RAID_WARNING)
@@ -35,7 +31,12 @@ function SN_ChatReader:ProcessMessage(event, ...)
 
     -- Item distribution
     if event == CHAT_MSG_RAID_WARNING then
-        SN_ItemList:Add(text)
+        local itemName = GetItemInfo(text)
+
+        if itemName then
+            SN:PrintMsg("Detected item "..itemName)
+            SN_ItemList:Add(itemName)
+        end
     else
         if string.StartsWith(text, "+") then
             SN:PrintMsg(playerName.." has selected need.")
