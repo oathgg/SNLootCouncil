@@ -12,6 +12,11 @@ function SN_MasterLootEvent.CHAT_MSG_LOOT(...)
         if string.find(chatMsg, "receive") then
             local receiver, _, _, item = strsplit(" ", chatMsg, 4)
 
+            -- We don't want to register "You" as a potential target, hence we update it to the player name
+            if receiver == "You" then
+                receiver = UnitName("player")
+            end
+
             if receiver and item then
                 local itemName, itemLink, itemRarity = GetItemInfo(item)
 
