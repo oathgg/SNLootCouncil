@@ -17,6 +17,7 @@ Helpers\LuaHelper.lua
 
 Utils\SN_ChatReader.lua
 Utils\SN_TradeTracker.lua
+Utils\SN_MasterLoot.lua
 
 Models\SN_Item.lua
 
