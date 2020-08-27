@@ -47,8 +47,10 @@ function SN_ItemTracker:Start()
 end
 
 function SN_ItemTracker:Stop()
-    IS_ENABLED = false
-    SN:PrintMsg("Stopped tracker")
+    if IS_ENABLED then
+        IS_ENABLED = false
+        SN:PrintMsg("Stopped tracker")
+    end
 end
 
 function SN_ItemTracker:Reset()
