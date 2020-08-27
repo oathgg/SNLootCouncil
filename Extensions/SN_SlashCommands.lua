@@ -4,7 +4,9 @@ function addonCommand(command)
     elseif  command == "show"   then SN_ItemList:Show()
     elseif  command == "reset"  then SN_ItemTracker:Reset()
     else                             SN:PrintMsg("Available commands are:"
-        .."\n/sn show - Starts tracking and shows loot being distributed."
+        .."\n/sn start - Starts the tracker."
+        .."\n/sn stop - Stops the tracker."
+        .."\n/sn show - Shows known loot which has been distributed."
         .."\n/sn reset - Resets the list of loot being distributed.")
     end
 end
