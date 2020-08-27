@@ -7,13 +7,15 @@ function OnTradeSuccess(...)
         local targetPlayer, itemName, quality = ...
 
         if targetPlayer and itemName and quality then
-            local itemId = SN_Item:GetItemByNameWithoutOwner(itemName)
+            if quality >= SN.MinimumItemRarityBeforeProcessing then
+                local itemId = SN_Item:GetItemByNameWithoutOwner(itemName)
 
-            if itemId then
-                SN_Item:AssignOwner(itemId, targetPlayer)
-                SN:PrintMsg("Traded "..itemName.." to "..targetPlayer)
-            else
-                SN:PrintMsg("Couldn't find an ownerless item with name "..itemName)
+                if itemId then
+                    SN_Item:AssignOwner(itemId, targetPlayer)
+                    SN:PrintMsg("Traded "..itemName.." to "..targetPlayer)
+                else
+                    SN:PrintMsg("Couldn't find an ownerless item with name "..itemName)
+                end
             end
         end
     end

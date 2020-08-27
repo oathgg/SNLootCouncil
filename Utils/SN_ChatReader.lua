@@ -33,9 +33,9 @@ function SN_ChatReader:ProcessMessage(event, ...)
     if event == CHAT_MSG_RAID_WARNING then
         local itemName, itemLink, itemRarity = GetItemInfo(text)
 
-        -- https://wowwiki.fandom.com/wiki/API_TYPE_Quality
-        if itemName and itemRarity >= 4 then
-                SN:PrintMsg("Detected item "..itemName)
+        
+        if itemName and itemRarity >= SN.MinimumItemRarityBeforeProcessing then
+            SN:PrintMsg("Detected item "..itemName)
             SN_ItemList:Add(itemName)
         end
     else
