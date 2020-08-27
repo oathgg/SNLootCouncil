@@ -3,16 +3,18 @@ SN_ItemTracker = {}
 local IS_ENABLED = false
 
 function OnTradeSuccess(...)
-    local targetPlayer, itemName, quality = ...
+    if IS_ENABLED then
+        local targetPlayer, itemName, quality = ...
 
-    if targetPlayer and itemName and quality then
-        local itemId = SN_Item:GetItemByNameWithoutOwner(itemName)
+        if targetPlayer and itemName and quality then
+            local itemId = SN_Item:GetItemByNameWithoutOwner(itemName)
 
-        if itemId then
-            SN_Item:AssignOwner(itemId, targetPlayer)
-            SN:PrintMsg("Traded "..itemName.." to "..targetPlayer)
-        else
-            SN:PrintMsg("Couldn't find an ownerless item with name "..itemName)
+            if itemId then
+                SN_Item:AssignOwner(itemId, targetPlayer)
+                SN:PrintMsg("Traded "..itemName.." to "..targetPlayer)
+            else
+                SN:PrintMsg("Couldn't find an ownerless item with name "..itemName)
+            end
         end
     end
 end
@@ -30,7 +32,8 @@ function SN_ItemTracker:Start()
 end
 
 function SN_ItemTracker:Stop()
-    --SN:PrintMsg("Stopped tracker")
+    IS_ENABLED = false
+    SN:PrintMsg("Stopped tracker")
 end
 
 function SN_ItemTracker:Reset()
