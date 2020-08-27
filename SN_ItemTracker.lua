@@ -17,7 +17,8 @@ function OnItemDistribution(...)
 
                 -- Look up the item if we can't find anything for our own playername.
                 -- We most likely looted it so we can distribute it later through a trade.
-                if not itemId then
+                -- So if we don't have an item AND we're trading it then we should look it up in the list.
+                if not itemId and targetPlayer ~= UnitName("player") then
                     itemId = SN_Item:GetItemByNameWithMyselfAsOwner(itemName)
                 end
 
