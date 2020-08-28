@@ -17,7 +17,7 @@ local function GenerateText()
         lines = lines..values.Name.." : "
 
         -- Discord tagging system
-        if values.Owner ~= "Disenchanted" then
+        if values.Owner ~= "Disenchant" then
             lines = lines.."@"
         end
 
