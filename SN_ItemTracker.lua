@@ -1,6 +1,7 @@
 SN_ItemTracker = {}
 
 local IS_ENABLED = false
+local PREV_ITEM = ""
 
 function OnItemDistribution(...)
     if IS_ENABLED then
@@ -31,8 +32,13 @@ function OnChatDistribution(...)
     if IS_ENABLED then
         local itemName = ...
 
-        SN:PrintMsg("Detected item "..itemName)
-        SN_ItemList:Add(itemName)
+        -- In case they also announce the OS in raid warning.
+        if itemName ~= PREV_ITEM then
+            SN:PrintMsg("Detected item "..itemName)
+            SN_ItemList:Add(itemName)
+
+            PREV_ITEM = itemName
+        end
     end
 end
 
