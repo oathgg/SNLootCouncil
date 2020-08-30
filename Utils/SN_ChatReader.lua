@@ -6,6 +6,8 @@ local CHAT_MSG_RAID_LEADER = "CHAT_MSG_RAID_LEADER"
 local CHAT_MSG_RAID_WARNING = "CHAT_MSG_RAID_WARNING"
 local ENABLED = false
 
+local CALLBACK = {}
+
 function SN_ChatReader:Start()
     if not ENABLED then
         EVENTS:RegisterEvent(CHAT_MSG_RAID)
@@ -32,17 +34,21 @@ function SN_ChatReader:ProcessMessage(event, ...)
     -- Item distribution
     if event == CHAT_MSG_RAID_WARNING then
         local itemName, itemLink, itemRarity = GetItemInfo(text)
-
         
         if itemName and itemRarity >= SN.MinimumItemRarityBeforeProcessing then
-            SN:PrintMsg("Detected item "..itemName)
-            SN_ItemList:Add(itemName)
+            for key, callback in pairs(CALLBACK) do
+                callback(itemName)
+            end 
         end
     else
         -- if string.StartsWith(text, "+") then
         --     SN:PrintMsg(playerName.." has selected need.")
         -- end
     end
+end
+
+function SN_ChatReader:SubscribeCallback(callback)
+    tinsert(CALLBACK, callback)
 end
 
 EVENTS:SetScript("OnEvent", function(self, event, ...) SN_ChatReader:ProcessMessage(event, ...) end)

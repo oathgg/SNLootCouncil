@@ -27,12 +27,22 @@ function OnItemDistribution(...)
     end
 end
 
+function OnChatDistribution(...)
+    if IS_ENABLED then
+        local itemName = ...
+
+        SN:PrintMsg("Detected item "..itemName)
+        SN_ItemList:Add(itemName)
+    end
+end
+
 function SN_ItemTracker:Start()
     if not IS_ENABLED then
         SN:PrintMsg("Started tracker")
         SN_ChatReader:Start()
         SN_TradeTracker:SubscribeSuccessCallback(OnItemDistribution)
         SN_MasterLoot:SubscribeCallback(OnItemDistribution)
+        SN_ChatReader:SubscribeCallback(OnChatDistribution)
 
         IS_ENABLED = true
     else
