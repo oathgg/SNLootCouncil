@@ -11,6 +11,11 @@ function OnItemDistribution(...)
                 -- We will find something if it's being distributed through the master loot function
                 local itemId = SN_Item:GetItemByNameWithoutOwner(itemName)
 
+                -- Ignore these items
+                if itemId == 20725 then -- Nexus crystal
+                    return
+                end
+
                 -- We most likely looted it ourself so we can distribute it later through a trade.
                 -- If we don't have an item AND we're trading it then we should look it up in the list with ourselves as owner.
                 if not itemId and targetPlayer ~= UnitName("player") then

@@ -40,10 +40,6 @@ function SN_ChatReader:ProcessMessage(event, ...)
                 callback(itemName)
             end 
         end
-    else
-        -- if string.StartsWith(text, "+") then
-        --     SN:PrintMsg(playerName.." has selected need.")
-        -- end
     end
 end
 
