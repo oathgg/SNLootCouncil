@@ -12,7 +12,7 @@ function OnItemDistribution(...)
                 local itemId = SN_Item:GetItemByNameWithoutOwner(itemName)
 
                 -- Ignore these items
-                if itemId == 20725 then -- Nexus crystal
+                if itemName == "Nexus Crystal" then 
                     return
                 end
 
