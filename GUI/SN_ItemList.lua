@@ -20,19 +20,19 @@ end
 local MenuOptions = {
     ["Assign Owner"] = {},
     ["Disenchant"] = {},
+    ["Guild bank"] = {},
     ["Delete"] = {},
 }
 
 local function DropDownOnClick(self, arg1, arg2, checked)
     if self.value.Key == "Assign Owner" then
         SN_ItemOwner:New(selectedLine.InternalItemId)
-    elseif self.value.Key == "Disenchant" then
-        SN_Item:AssignOwner(selectedLine.InternalItemId, "Disenchant")
-        SN_ItemList:ForceUpdate()
     elseif self.value.Key == "Delete" then
         SN:PrintMsg("Removing "..selectedLine.ItemName)
-        
         SN_Item:Delete(selectedLine.InternalItemId)
+        SN_ItemList:ForceUpdate()
+    else
+        SN_Item:AssignOwner(selectedLine.InternalItemId, self.value.Key)
         SN_ItemList:ForceUpdate()
     end
 end
