@@ -40,8 +40,10 @@ function UIHelper:CreateSettingsKeyCB(parent, label, settingsKey, width)
     end, width)
 end
 
-local function DropDownInitialize(self, level, menuItems, callback, hasDeleteOption)
+function UIHelper:CreateSimpleDropdownMenu(self, level, menuItems, callback, hasDeleteOption)
+    hasDeleteOption = hasDeleteOption or true
     level = level or 1;
+
     if (level == 1) then
         for key, subarray in pairs(menuItems) do
             local info = UIDropDownMenu_CreateInfo();
@@ -66,10 +68,4 @@ local function DropDownInitialize(self, level, menuItems, callback, hasDeleteOpt
             UIDropDownMenu_AddButton(info, level);
         end
     end 
-end 
-
-function UIHelper:CreateSimpleDropdownMenu(self, level, menuItems, callback, hasDeleteOption)
-    hasDeleteOption = hasDeleteOption or true
-    DropDownInitialize(self, level, menuItems, callback, hasDeleteOption)
 end
-
