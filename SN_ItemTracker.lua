@@ -6,15 +6,16 @@ local PREV_ITEM = ""
 function OnItemDistribution(...)
     if IS_ENABLED then
         local targetPlayer, itemName, quality = ...
+
+        -- Ignore these items
+        if itemName == "Nexus Crystal" then 
+            return
+        end
+
         if targetPlayer and itemName and quality then
             if quality >= SN.MinimumItemRarityBeforeProcessing then
                 -- We will find something if it's being distributed through the master loot function
                 local itemId = SN_Item:GetItemByNameWithoutOwner(itemName)
-
-                -- Ignore these items
-                if itemName == "Nexus Crystal" then 
-                    return
-                end
 
                 -- We most likely looted it ourself so we can distribute it later through a trade.
                 -- If we don't have an item AND we're trading it then we should look it up in the list with ourselves as owner.
