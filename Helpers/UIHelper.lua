@@ -68,7 +68,7 @@ local function DropDownInitialize(self, level, menuItems, callback, hasDeleteOpt
     end 
 end 
 
-function UIHelper:CreateDropdownMenu(self, level, menuItems, callback, hasDeleteOption)
+function UIHelper:CreateSimpleDropdownMenu(self, level, menuItems, callback, hasDeleteOption)
     hasDeleteOption = hasDeleteOption or true
     DropDownInitialize(self, level, menuItems, callback, hasDeleteOption)
 end

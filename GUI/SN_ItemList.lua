@@ -70,7 +70,7 @@ local function Update()
                             ["Guild bank"] = {},
                         }
 
-                        UIHelper:CreateDropdownMenu(s, level, options, SN_ITEMLIST_DROPDOWN_CALLBACK) 
+                        UIHelper:CreateSimpleDropdownMenu(s, level, options, SN_ITEMLIST_DROPDOWN_CALLBACK) 
                     end, "MENU")
                     ToggleDropDownMenu(1, nil, dropDown, "cursor")
                 end
