@@ -21,7 +21,6 @@ local MenuOptions = {
     ["Assign Owner"] = {},
     ["Disenchant"] = {},
     ["Guild bank"] = {},
-    ["Delete"] = {},
 }
 
 local function DropDownOnClick(self, arg1, arg2, checked)
@@ -51,6 +50,16 @@ local function DropDownInitialize(self, level)
             };
             UIDropDownMenu_AddButton(info, level);
         end 
+
+        -- Adding the "DELETE" button as the last one on the list
+        local info = UIDropDownMenu_CreateInfo();
+        info.notCheckable = true
+        info.text = "Delete";
+        info.func = DropDownOnClick
+        info.value = { 
+            ["Key"] = "Delete";
+        };
+        UIDropDownMenu_AddButton(info, level);
     end 
 end 
 
