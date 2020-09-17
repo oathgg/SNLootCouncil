@@ -15,15 +15,7 @@ local function BuildTableContent()
     end
 end
 
--- https://wowwiki.fandom.com/wiki/UI_Object_UIDropDownMenu
--- creating test data structure
-local MenuOptions = {
-    ["Assign Owner"] = {},
-    ["Disenchant"] = {},
-    ["Guild bank"] = {},
-}
-
-local function DropDownOnClick(self, arg1, arg2, checked)
+local function SN_ITEMLIST_DROPDOWN_CALLBACK(self, arg1, arg2, checked)
     if self.value.Key == "Assign Owner" then
         SN_ItemOwner:New(selectedLine.InternalItemId)
     elseif self.value.Key == "Delete" then
@@ -35,33 +27,6 @@ local function DropDownOnClick(self, arg1, arg2, checked)
         SN_ItemList:ForceUpdate()
     end
 end
-
--- menu create function
-local function DropDownInitialize(self, level)
-    level = level or 1;
-    if (level == 1) then
-        for key, subarray in pairs(MenuOptions) do
-            local info = UIDropDownMenu_CreateInfo();
-            info.notCheckable = true
-            info.text = key;
-            info.func = DropDownOnClick
-            info.value = { 
-                ["Key"] = key;
-            };
-            UIDropDownMenu_AddButton(info, level);
-        end 
-
-        -- Adding the "DELETE" button as the last one on the list
-        local info = UIDropDownMenu_CreateInfo();
-        info.notCheckable = true
-        info.text = "Delete";
-        info.func = DropDownOnClick
-        info.value = { 
-            ["Key"] = "Delete";
-        };
-        UIDropDownMenu_AddButton(info, level);
-    end 
-end 
 
 local function Update()
     local buttons = HybridScrollFrame_GetButtons(scroll)
@@ -96,7 +61,17 @@ local function Update()
             -- Check if we don't exceed our bounds before applying button functionality
             if curRowIndex <= table.getn(tableContent) then
                 if button == "RightButton" then
-                    UIDropDownMenu_Initialize(dropDown, DropDownInitialize, "MENU")
+                    UIDropDownMenu_Initialize(dropDown, function(...)
+                        local s, level = ... 
+
+                        local options = {
+                            ["Assign Owner"] = {},
+                            ["Disenchant"] = {},
+                            ["Guild bank"] = {},
+                        }
+
+                        UIHelper:CreateDropdownMenu(s, level, options, SN_ITEMLIST_DROPDOWN_CALLBACK) 
+                    end, "MENU")
                     ToggleDropDownMenu(1, nil, dropDown, "cursor")
                 end
             end

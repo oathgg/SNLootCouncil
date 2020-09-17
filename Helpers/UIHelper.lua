@@ -39,3 +39,37 @@ function UIHelper:CreateSettingsKeyCB(parent, label, settingsKey, width)
         Settings:SetKeyValue(settingsKey, value)
     end, width)
 end
+
+local function DropDownInitialize(self, level, menuItems, callback, hasDeleteOption)
+    level = level or 1;
+    if (level == 1) then
+        for key, subarray in pairs(menuItems) do
+            local info = UIDropDownMenu_CreateInfo();
+            info.notCheckable = true
+            info.text = key;
+            info.func = callback
+            info.value = { 
+                ["Key"] = key;
+            };
+            UIDropDownMenu_AddButton(info, level);
+        end 
+
+        if hasDeleteOption then
+            -- Adding the "DELETE" button as the last one on the list
+            local info = UIDropDownMenu_CreateInfo();
+            info.notCheckable = true
+            info.text = "Delete";
+            info.func = callback
+            info.value = { 
+                ["Key"] = "Delete";
+            };
+            UIDropDownMenu_AddButton(info, level);
+        end
+    end 
+end 
+
+function UIHelper:CreateDropdownMenu(self, level, menuItems, callback, hasDeleteOption)
+    hasDeleteOption = hasDeleteOption or true
+    DropDownInitialize(self, level, menuItems, callback, hasDeleteOption)
+end
+
