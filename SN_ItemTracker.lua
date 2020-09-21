@@ -16,11 +16,18 @@ function OnItemTradeDistribution(...)
         local targetPlayer, itemName, quality = ...
 
         local itemId = SN_Item:GetItemByNameWithMyselfAsOwner(itemName)
+
+        -- BUG:: Fallback, if we haven't found an item with ourselves as owner then we try to go with an ownerless item.
+        -- However, how is this possible, because the item should've been distributed through ML first, did the ML action not catch the item?
         if not itemId then
-            SN:PrintMsg("Couldn't find the traded item in the list.")
-        else
+            itemId = SN_Item:GetItemByNameWithoutOwner(itemName)
+        end
+
+        if itemId then
             SN_Item:AssignOwner(itemId, targetPlayer)
             SN:PrintMsg("Distributed "..itemName.." to "..targetPlayer)
+        else
+            SN:PrintMsg("Couldn't find the traded item in the list.")
         end
     end
 end
@@ -79,5 +86,6 @@ function SN_ItemTracker:Stop()
 end
 
 function SN_ItemTracker:Reset()
+    PREV_ITEM = ""
     SN_Item:Reset()
 end
