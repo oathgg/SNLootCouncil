@@ -9,6 +9,11 @@ local function IsValidDistribution(...)
     return IS_ENABLED and targetPlayer and itemName and quality and itemName ~= "Nexus Crystal" and quality >= SN.MinimumItemRarityBeforeProcessing
 end
 
+local function Distribute(itemId, itemName, targetPlayer)
+    SN_Item:AssignOwner(itemId, targetPlayer)
+    SN:PrintMsg("Distributed '"..itemName.."' to "..targetPlayer)
+end
+
 -- When we trade the item to someone else this function will trigger.
 -- We check if we have an item in our already created list with our own name, if not then we quickly add this item to our list and assign the owner.
 function OnItemTradeDistribution(...)
@@ -24,8 +29,7 @@ function OnItemTradeDistribution(...)
         end
 
         if itemId then
-            SN_Item:AssignOwner(itemId, targetPlayer)
-            SN:PrintMsg("Distributed "..itemName.." to "..targetPlayer)
+            Distribute(itemId, itemName, targetPlayer)
         else
             SN:PrintMsg("Couldn't find the traded item in the list.")
         end
@@ -40,13 +44,12 @@ function OnItemMLDistribution(...)
 
         -- BUG:: In case we somehow didn't catch the raid warning we will create it again.
         if not itemId then
-            SN:PrintMsg("Couldn't find an item in the list for name '"..itemName.."', creating item.")
+            SN:PrintMsg("Couldn't find '"..itemName.."', creating item.")
             SN_ItemList:Add(itemName)
             itemId = SN_Item:GetItemByNameWithoutOwner(itemName)
         end
 
-        SN_Item:AssignOwner(itemId, targetPlayer)
-        SN:PrintMsg("Distributed "..itemName.." to "..targetPlayer)
+        Distribute(itemId, itemName, targetPlayer)
     end
 end
 
