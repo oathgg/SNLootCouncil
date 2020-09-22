@@ -6,7 +6,7 @@ local PREV_ITEM = ""
 local function IsValidDistribution(...)
     local targetPlayer, itemName, quality = ...
 
-    return IS_ENABLED and targetPlayer and itemName and quality and itemName ~= "Nexus Crystal" and quality >= SN.MinimumItemRarityBeforeProcessing
+    return IS_ENABLED and targetPlayer and itemName and quality and itemName ~= "Nexus Crystal" and itemName ~= "Elementium Ore" and quality >= SN.MinimumItemRarityBeforeProcessing
 end
 
 local function Distribute(itemId, itemName, targetPlayer)
