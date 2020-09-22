@@ -71,10 +71,6 @@ function SN_ItemTracker:Start()
     if not IS_ENABLED then
         SN:PrintMsg("Started tracker")
         SN_ChatReader:Start()
-        SN_TradeTracker:SubscribeSuccessCallback(OnItemTradeDistribution)
-        SN_MasterLoot:SubscribeCallback(OnItemMLDistribution)
-        SN_ChatReader:SubscribeCallback(OnChatDistribution)
-
         IS_ENABLED = true
     else
         SN:PrintMsg("Already tracking")
@@ -92,3 +88,7 @@ function SN_ItemTracker:Reset()
     PREV_ITEM = ""
     SN_Item:Reset()
 end
+
+SN_TradeTracker:SubscribeSuccessCallback(OnItemTradeDistribution)
+SN_MasterLoot:SubscribeCallback(OnItemMLDistribution)
+SN_ChatReader:SubscribeCallback(OnChatDistribution)
