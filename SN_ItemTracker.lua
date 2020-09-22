@@ -79,6 +79,7 @@ end
 
 function SN_ItemTracker:Stop()
     if IS_ENABLED then
+        SN_ChatReader:Stop()
         IS_ENABLED = false
         SN:PrintMsg("Stopped tracker")
     end
