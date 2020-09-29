@@ -90,6 +90,6 @@ function SN_ItemTracker:Reset()
     SN_Item:Reset()
 end
 
-SN_TradeTracker:SubscribeSuccessCallback(OnItemTradeDistribution)
+SN_TradeTracker:SubscribeCallback(OnItemTradeDistribution)
 SN_MasterLoot:SubscribeCallback(OnItemMLDistribution)
 SN_ChatReader:SubscribeCallback(OnChatDistribution)

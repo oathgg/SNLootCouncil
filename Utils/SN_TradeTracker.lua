@@ -58,7 +58,7 @@ function SN_TradeWindow.TRADE_REQUEST_CANCEL()
     TRADE_REQUEST_CANCEL_EVENT_TRIGGERED = true
 end
 
-function SN_TradeTracker:SubscribeSuccessCallback(callback)
+function SN_TradeTracker:SubscribeCallback(callback)
     tinsert(TRADE_SUCCESS_CALLBACK, callback)
 end
 
