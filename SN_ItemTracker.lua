@@ -54,6 +54,9 @@ function OnItemMLDistribution(...)
         -- Broadcasting the distribution to the raid group, if other players are using this addon but they are out of range of the person
         -- receiving the loot, then they will still be notified that the player received it.
         SN_Communication:BroadcastDistribution(targetPlayer, itemName, quality)
+
+        -- Once the item is distributed we can clear the flag
+        PREV_ITEM = ""
     end
 end
 
