@@ -50,6 +50,10 @@ function OnItemMLDistribution(...)
         end
 
         Distribute(itemId, itemName, targetPlayer)
+
+        -- Broadcasting the distribution to the raid group, if other players are using this addon but they are out of range of the person
+        -- receiving the loot, then they will still be notified that the player received it.
+        SN_Communication:BroadcastDistribution(targetPlayer, itemName, quality)
     end
 end
 
@@ -63,6 +67,18 @@ function OnChatDistribution(...)
             SN_ItemList:Add(itemName)
 
             PREV_ITEM = itemName
+        end
+    end
+end
+
+-- We will try to find an ownerless item, if we can't find one then we just ignore the broadcast.
+function SN_ItemTracker:OnBroadcastDistribution(...)
+    if IsValidDistribution(...) then
+        local targetPlayer, itemName, quality = ...
+        local itemId = SN_Item:GetItemByNameWithoutOwner(itemName)
+        
+        if itemId then
+            Distribute(itemId, itemName, targetPlayer)
         end
     end
 end
