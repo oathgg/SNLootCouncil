@@ -1,6 +1,6 @@
 SN_Communication = {}
 local SN_COMMS_EVENTS = CreateFrame("frame")
-local ADDON_MESSAGE_PREFIX = 'SNLOOTCOUNCIL'
+local ADDON_MESSAGE_PREFIX = 'SNLC'
 local ADDON_MESSAGE_DISTRIBUTION = 'DISTRIBUTION'
 
 local function Broadcast(msg)
@@ -11,7 +11,7 @@ local function Broadcast(msg)
     elseif IsInGroup() then
 		chatType = "PARTY"
     end
-    
+
     if chatType then
         -- SN:PrintMsg("-> "..ADDON_MESSAGE_PREFIX..", "..msg..", "..chatType)
         C_ChatInfo.SendAddonMessage(ADDON_MESSAGE_PREFIX, msg, chatType)
@@ -35,6 +35,7 @@ end
 
 function SN_COMMS_EVENTS.CHAT_MSG_ADDON(...)
     local prefix, msg, channel, sender = ...
+
     -- Don't listen to our own broadcasts.
     local senderWithoutRealm = strsplit("-", sender)
     if senderWithoutRealm == UnitName("player") then
@@ -42,14 +43,23 @@ function SN_COMMS_EVENTS.CHAT_MSG_ADDON(...)
     end
 
     if prefix == ADDON_MESSAGE_PREFIX then
-        -- SN:PrintMsg("<- "..ADDON_MESSAGE_PREFIX..", "..msg..", "..chatType)
+        -- SN:PrintMsg("<- "..prefix..", "..msg)
 
-        if string.find(msg, ADDON_MESSAGE_DISTRIBUTION) then
+        local msgType = strsplit("\t", msg)
+        if msgType == ADDON_MESSAGE_DISTRIBUTION then
             local _, targetPlayer, itemName, quality = strsplit("\t", msg)
-            SN_ItemTracker:OnBroadcastDistribution(targetPlayer, itemName, quality)
+            SN_ItemTracker:OnBroadcastDistribution(targetPlayer, itemName, tonumber(quality))
         end
     end
 end
 
+function SN_COMMS_EVENTS.PLAYER_LOGIN()
+    local successfulRequest = C_ChatInfo.RegisterAddonMessagePrefix(ADDON_MESSAGE_PREFIX)
+    if not successfulRequest then
+		SN:PrintMsg("WARNING: Something went wrong during initialization of the communication handler.")
+	end
+end
+
+SN_COMMS_EVENTS:RegisterEvent("PLAYER_LOGIN")
 SN_COMMS_EVENTS:RegisterEvent("CHAT_MSG_ADDON")
 SN_COMMS_EVENTS:SetScript("OnEvent", function(self, event, ...) self[event](...) end)
