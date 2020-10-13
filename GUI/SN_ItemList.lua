@@ -129,7 +129,6 @@ local function CreateGUI()
     resetBtn:SetText("Reset")
     resetBtn:SetCallback("OnClick", function() 
         SN_ItemTracker:Reset() 
-        SN_ItemList:ForceUpdate()
     end)
 
     CreateTable()

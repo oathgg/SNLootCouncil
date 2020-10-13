@@ -41,7 +41,9 @@ function UIHelper:CreateSettingsKeyCB(parent, label, settingsKey, width)
 end
 
 function UIHelper:CreateSimpleDropdownMenu(self, level, menuItems, callback, hasDeleteOption)
-    hasDeleteOption = hasDeleteOption or true
+    if hasDeleteOption == nil then -- because if we check if it's false then it will always be true...
+        hasDeleteOption = true
+    end
     level = level or 1;
 
     if (level == 1) then

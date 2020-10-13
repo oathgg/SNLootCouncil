@@ -87,7 +87,7 @@ function SN_ItemTracker:OnBroadcastDistribution(...)
 end
 
 function SN_ItemTracker:Start()
-    if not IS_ENABLED then
+    if not SN_ItemTracker:IsRunning() then
         SN:PrintMsg("Started tracker")
         SN_ChatReader:Start()
         IS_ENABLED = true
@@ -97,7 +97,7 @@ function SN_ItemTracker:Start()
 end
 
 function SN_ItemTracker:Stop()
-    if IS_ENABLED then
+    if SN_ItemTracker:IsRunning() then
         SN:PrintMsg("Stopped tracker")
         SN_ChatReader:Stop()
         IS_ENABLED = false
@@ -107,6 +107,11 @@ end
 function SN_ItemTracker:Reset()
     PREV_ITEM = ""
     SN_Item:Reset()
+    SN_ItemList:ForceUpdate()
+end
+
+function SN_ItemTracker:IsRunning()
+    return IS_ENABLED
 end
 
 SN_TradeTracker:SubscribeCallback(OnItemTradeDistribution)
