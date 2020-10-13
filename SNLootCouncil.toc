@@ -3,7 +3,7 @@
 ## Author: Okrah - Skullflame EU
 ## Version: 1.0.0
 # SavedVariablesPerCharacter: 
-## SavedVariables: SAVED_ALL_ITEMS
+## SavedVariables: SAVED_ALL_ITEMS, SNLootCouncilDB
 
 Core.lua
 
@@ -26,6 +26,7 @@ Models\SN_Item.lua
 GUI\SN_ItemList.lua
 GUI\SN_ItemOwner.lua
 GUI\SN_Report.lua
+GUI\SN_MinimapButton.lua
 
 Extensions\SN_SlashCommands.lua
 

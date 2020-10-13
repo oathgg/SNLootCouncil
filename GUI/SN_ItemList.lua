@@ -118,7 +118,7 @@ local function CreateGUI()
     _G["AAAA_ItemList"] = mainFrame
     tinsert(UISpecialFrames, "AAAA_ItemList")	-- allow ESC close
     mainFrame:SetWidth(500)
-    mainFrame:SetTitle("Item List")
+    mainFrame:SetTitle("SNLootCouncil")
     mainFrame:EnableResize(false)
 
     local reportBtn = AceGUI:Create("Button")
