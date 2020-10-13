@@ -99,9 +99,9 @@ end
 
 local function CreateTable()
     local tableHeader = CreateTableHeader()
-    tableContentGroup = AceGUI:Create("SimpleGroup")
+    local tableContentGroup = AceGUI:Create("SimpleGroup")
 	tableContentGroup:SetFullWidth(true)
-	tableContentGroup:SetHeight(390)
+	tableContentGroup:SetHeight(410)
 	tableContentGroup:SetLayout("Fill")
 	mainFrame:AddChild(tableContentGroup)
 	tableContentGroup:ClearAllPoints()
@@ -113,7 +113,7 @@ local function CreateTable()
 end
 
 local function CreateGUI()
-    mainFrame = AceGUI:Create("Frame", UIParent)
+    mainFrame = AceGUI:Create("Window", UIParent)
     mainFrame:Hide()
     _G["AAAA_ItemList"] = mainFrame
     tinsert(UISpecialFrames, "AAAA_ItemList")	-- allow ESC close
@@ -123,11 +123,23 @@ local function CreateGUI()
 
     local reportBtn = AceGUI:Create("Button")
     reportBtn:SetText("Report")
-    reportBtn:SetRelativeWidth(0.30)
     reportBtn:SetCallback("OnClick", function() SN_ItemList:Report() end)
-    mainFrame:AddChild(reportBtn)
+
+    local resetBtn = AceGUI:Create("Button")
+    resetBtn:SetText("Reset")
+    resetBtn:SetCallback("OnClick", function() 
+        SN_ItemTracker:Reset() 
+        SN_ItemList:ForceUpdate()
+    end)
 
     CreateTable()
+
+    mainFrame:AddChildren(reportBtn, resetBtn)
+    resetBtn:ClearAllPoints()
+    resetBtn:SetPoint("BOTTOMRIGHT",0,0)
+
+    reportBtn:ClearAllPoints()
+    reportBtn:SetPoint("BOTTOMLEFT",0,0)
 end
 
 function SN_ItemList:ForceUpdate()

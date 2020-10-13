@@ -30,7 +30,7 @@ end
 local function GenerateMultiLineEditBox()
     local widget = AceGUI:Create("MultiLineEditBox")
     widget:DisableButton(true)
-    widget:SetLabel("Items")
+    widget:SetLabel("")
     widget:SetText(GenerateText())
     widget:SetFocus()
     widget:SetFullWidth(true)
