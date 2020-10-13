@@ -12,5 +12,6 @@ Place the folder in your addon directory of world of warcraft.
 
 ### Commands
 
+- **/sn** - Shows all available commands.
 - **/sn show** - Starts the chat reader and opens a screen which shows the loot being distributed.
 - **/sn reset** - Reset all the loot currently in the list
