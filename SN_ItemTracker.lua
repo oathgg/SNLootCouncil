@@ -107,7 +107,10 @@ end
 function SN_ItemTracker:Reset()
     PREV_ITEM = ""
     SN_Item:Reset()
-    SN_ItemList:ForceUpdate()
+    if SN_ItemList:IsShown() then
+        SN_ItemList:Show()
+        SN_ItemList:Show()
+    end
 end
 
 function SN_ItemTracker:IsRunning()

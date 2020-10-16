@@ -1,3 +1,5 @@
+local ADDON_NAME = "SNLootCouncil"
+
 local function SN_MINIMAPBUTTON_DROPDOWN_CALLBACK(self, arg1, arg2, checked)
     local command = strupper(self.value.Key)
     if      command == "START"  then SN_ItemTracker:Start()
@@ -40,16 +42,16 @@ local function OnMinimapButtonClick(...)
     end 
 end
 
-local addon = LibStub("AceAddon-3.0"):NewAddon("SNLootCouncil", "AceConsole-3.0")
-local SNLootCouncilLDB = LibStub("LibDataBroker-1.1"):NewDataObject("SNLootCouncil", {
+local addon = LibStub("AceAddon-3.0"):NewAddon(ADDON_NAME, "AceConsole-3.0")
+local SNLootCouncilLDB = LibStub("LibDataBroker-1.1"):NewDataObject(ADDON_NAME, {
     type = "data source",
-    text = "SNLootCouncil",
+    text = ADDON_NAME,
     icon = "Interface\\Icons\\INV_Chest_Cloth_17",
     OnClick = function(...) OnMinimapButtonClick(...) end,
 })
 local icon = LibStub("LibDBIcon-1.0")
 
 function addon:OnInitialize() -- Obviously you'll need a ## SavedVariables: SNLootCouncilDB line in your TOC, duh! 
-    self.db = LibStub("AceDB-3.0"):New("SNLootCouncilDB", { profile = { minimap = { hide = false, }, }, }) 
-    icon:Register("SNLootCouncil", SNLootCouncilLDB, self.db.profile.minimap) 
+    self.db = LibStub("AceDB-3.0"):New(ADDON_NAME.."DB", { profile = { minimap = { hide = false, }, }, }) 
+    icon:Register(ADDON_NAME, SNLootCouncilLDB, self.db.profile.minimap) 
 end
