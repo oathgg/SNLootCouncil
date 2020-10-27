@@ -62,7 +62,7 @@ local function Update()
             local dropDown = CreateFrame("Frame", "DropDownValues", UIParent, "UIDropDownMenuTemplate")
             dropDown:Hide()
 
-            --selectedLine = { InternalItemId = internalItemId, ItemName = itemName }
+            selectedLine = { InternalItemId = internalItemId, ItemName = itemName }
 
             -- Check if we don't exceed our bounds before applying button functionality
             if curRowIndex <= table.getn(tableContent) then
