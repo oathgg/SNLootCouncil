@@ -47,7 +47,13 @@ local function Update()
 
         local internalItemId, itemName, owner = unpack(tableContent[curRowIndex])
         local button = buttons[index]
-        button.Name:SetText(itemName)
+        
+        local _, itemLink = GetItemInfo(itemName)
+        if itemLink then
+            button.Name:SetText(itemLink)
+        else
+            button.Name:SetText(itemName)
+        end
         button.Owner:SetText(owner)
 
         -- https://wowwiki.fandom.com/wiki/UIHANDLER_OnClick
@@ -56,7 +62,7 @@ local function Update()
             local dropDown = CreateFrame("Frame", "DropDownValues", UIParent, "UIDropDownMenuTemplate")
             dropDown:Hide()
 
-            selectedLine = { InternalItemId = internalItemId, ItemName = itemName }
+            --selectedLine = { InternalItemId = internalItemId, ItemName = itemName }
 
             -- Check if we don't exceed our bounds before applying button functionality
             if curRowIndex <= table.getn(tableContent) then
@@ -76,6 +82,18 @@ local function Update()
                 end
             end
         end)
+        button:SetScript('OnEnter', function() 
+            local _, itemLink = GetItemInfo(itemName)
+            if (itemLink) then
+                GameTooltip_SetDefaultAnchor(GameTooltip, UIParent) -- Lower right corner
+                GameTooltip:SetHyperlink(itemLink)
+                GameTooltip:Show()
+            end
+        end)
+        button:SetScript('OnLeave', function() 
+            GameTooltip:Hide()
+        end)
+
         button:Show()
     end
     
