@@ -141,7 +141,7 @@ local function CreateGUI()
 
     local reportBtn = AceGUI:Create("Button")
     reportBtn:SetText("Report")
-    reportBtn:SetCallback("OnClick", function() SN_ItemList:Report() end)
+    reportBtn:SetCallback("OnClick", function() SN_Report:Show() end)
 
     local resetBtn = AceGUI:Create("Button")
     resetBtn:SetText("Reset")
@@ -204,9 +204,4 @@ function SN_ItemList:Reset()
         end,
     }
     StaticPopup_Show("RESET");
-end
-
-function SN_ItemList:Report()
-    SN:PrintMsg("Generating report...")
-    SN_Report:Show()
 end

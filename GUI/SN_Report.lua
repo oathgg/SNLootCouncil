@@ -54,8 +54,15 @@ end
 
 function SN_Report:Show()
     if mainFrame == nil or not mainFrame:IsShown() then
-        CreateGUI()
-        mainFrame:Show()
+
+        if SN_Item:GetAllItems() == nil or getn(SN_Item:GetAllItems()) == 0 then
+            SN:PrintMsg("There are no items in the list to report.")
+        else
+            SN:PrintMsg("Generating report...")
+            CreateGUI()
+            mainFrame:Show()
+        end
+
     else
         mainFrame:Hide()
         mainFrame = nil
