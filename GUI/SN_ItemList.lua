@@ -48,12 +48,7 @@ local function Update()
         local internalItemId, itemName, owner = unpack(tableContent[curRowIndex])
         local button = buttons[index]
         
-        local _, itemLink = GetItemInfo(itemName)
-        if itemLink then
-            button.Name:SetText(itemLink)
-        else
-            button.Name:SetText(itemName)
-        end
+        button.Name:SetText(itemName)
         button.Owner:SetText(owner)
 
         -- https://wowwiki.fandom.com/wiki/UIHANDLER_OnClick
@@ -81,17 +76,6 @@ local function Update()
                     ToggleDropDownMenu(1, nil, dropDown, "cursor")
                 end
             end
-        end)
-        button:SetScript('OnEnter', function() 
-            local _, itemLink = GetItemInfo(itemName)
-            if (itemLink) then
-                GameTooltip_SetDefaultAnchor(GameTooltip, UIParent) -- Lower right corner
-                GameTooltip:SetHyperlink(itemLink)
-                GameTooltip:Show()
-            end
-        end)
-        button:SetScript('OnLeave', function() 
-            GameTooltip:Hide()
         end)
 
         button:Show()
