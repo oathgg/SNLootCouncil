@@ -14,8 +14,10 @@ function SN_AutoStarterEvents.PLAYER_ENTERING_WORLD(...)
     else
         SN_ItemTracker:Stop()
 
-        SN:PrintMsg("Combat logging stopped.")
-        LoggingCombat(false)
+        if LoggingCombat() then
+            SN:PrintMsg("Combat logging stopped.")
+            LoggingCombat(false)
+        end
     end
 end
 
