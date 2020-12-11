@@ -13,7 +13,6 @@ function SN_ChatReader:Start()
         EVENTS:RegisterEvent(CHAT_MSG_RAID)
         EVENTS:RegisterEvent(CHAT_MSG_RAID_LEADER)
         EVENTS:RegisterEvent(CHAT_MSG_RAID_WARNING)
-        LoggingCombat(true)
 
         ENABLED = true
     end
@@ -24,7 +23,6 @@ function SN_ChatReader:Stop()
         EVENTS:UnregisterEvent(CHAT_MSG_RAID)
         EVENTS:UnregisterEvent(CHAT_MSG_RAID_LEADER)
         EVENTS:UnregisterEvent(CHAT_MSG_RAID_WARNING)
-        LoggingCombat(false)
 
         ENABLED = false
     end

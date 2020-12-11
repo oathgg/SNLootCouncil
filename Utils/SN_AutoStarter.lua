@@ -8,9 +8,15 @@ function SN_AutoStarterEvents.PLAYER_ENTERING_WORLD(...)
         if maxPlayers == 40 then
             SN:PrintMsg("Player entered "..instanceName)
             SN_ItemTracker:Start()
+
+            SN:PrintMsg("Combat logging started.")
+            LoggingCombat(true)
         end
     else
         SN_ItemTracker:Stop()
+
+        SN:PrintMsg("Combat logging stopped.")
+        LoggingCombat(false)
     end
 end
 
