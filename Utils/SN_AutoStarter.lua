@@ -1,5 +1,4 @@
 local SN_AutoStarterEvents = CreateFrame("frame")
-SN_AutoStarter = {}
 
 function SN_AutoStarterEvents.PLAYER_ENTERING_WORLD(...)
     local inInstance, instanceType = IsInInstance()
