@@ -50,7 +50,7 @@ local function Update()
         local button = buttons[index]
         
         button.ItemId:SetText(itemId)
-        local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount, itemEquipLoc, itemTexture, itemSellPrice = GetItemInfo(itemId)
+        local _, itemLink = GetItemInfo(itemId)
         button.Name:SetText(itemLink)
         button.Owner:SetText(owner)
 
@@ -79,6 +79,17 @@ local function Update()
                     ToggleDropDownMenu(1, nil, dropDown, "cursor")
                 end
             end
+        end)
+        button:SetScript('OnEnter', function() 
+            local _, itemLink = GetItemInfo(itemId)
+            if (itemLink) then
+                GameTooltip_SetDefaultAnchor(GameTooltip, UIParent) -- Lower right corner
+                GameTooltip:SetHyperlink(itemLink)
+                GameTooltip:Show()
+            end
+        end)
+        button:SetScript('OnLeave', function() 
+            GameTooltip:Hide()
         end)
 
         button:Show()
