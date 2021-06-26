@@ -18,4 +18,4 @@ end
 -- By changing these values we change how the core of the product works.
 -- This value indicates the minimum item rarity before we assign it to the item list
 -- https://wowwiki.fandom.com/wiki/API_TYPE_Quality
-SN.MinimumItemRarityBeforeProcessing = 0
+SN.MinimumItemRarityBeforeProcessing = 4

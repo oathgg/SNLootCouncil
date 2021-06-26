@@ -50,7 +50,8 @@ local function Update()
         local button = buttons[index]
         
         button.ItemId:SetText(itemId)
-        button.Name:SetText(itemName)
+        local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount, itemEquipLoc, itemTexture, itemSellPrice = GetItemInfo(itemId)
+        button.Name:SetText(itemLink)
         button.Owner:SetText(owner)
 
         -- https://wowwiki.fandom.com/wiki/UIHANDLER_OnClick
