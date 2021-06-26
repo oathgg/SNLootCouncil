@@ -9,7 +9,6 @@ TableHelper = {}
     }
 }]]
 function TableHelper:CreateColumns(header, listOfColumns, onClickCallback)
-
     local columns = {}
     local columnIdx = 0
     local maxRecords = table.getn(listOfColumns)

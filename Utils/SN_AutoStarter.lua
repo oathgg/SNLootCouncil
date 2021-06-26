@@ -1,20 +1,22 @@
 local SN_AutoStarterEvents = CreateFrame("frame")
+local CombatLogEnabled = false
 
 function SN_AutoStarterEvents.PLAYER_ENTERING_WORLD(...)
     local inInstance, instanceType = IsInInstance()
     if inInstance and instanceType == "raid" then
-        local instanceName, _, _, _, maxPlayers = GetInstanceInfo()
-        if maxPlayers == 40 then
-            SN:PrintMsg("Player entered "..instanceName)
-            SN_ItemTracker:Start()
-
+        local instanceName, _, _, _, _ = GetInstanceInfo()
+        SN_ItemTracker:Start()
+        SN:PrintMsg("Player entered "..instanceName)
+        
+        if (-not CombatLogEnabled) then
             SN:PrintMsg("Combat logging started.")
             LoggingCombat(true)
+            CombatLogEnabled = true
         end
     else
         SN_ItemTracker:Stop()
 
-        if LoggingCombat() then
+        if (CombatLogEnabled) then
             SN:PrintMsg("Combat logging stopped.")
             LoggingCombat(false)
         end
