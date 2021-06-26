@@ -125,9 +125,16 @@ local function CreateGUI()
 
     CreateTable()
 
-    UIHelper:AddButtonToFrame(mainFrame, "Discord", "BOTTOMRIGHT", function() SN_Report:Show() end, 150)
-    UIHelper:AddButtonToFrame(mainFrame, "Thats My Bis", "BOTTOMRIGHT", function() SN_Report:Show() end, 150)
-    UIHelper:AddButtonToFrame(mainFrame, "Reset", "BOTTOMRIGHT", function() SN_ItemTracker:Reset() end, 150)
+    local buttonGroup = AceGUI:Create("SimpleGroup")
+    buttonGroup:SetLayout("Flow")
+    buttonGroup:SetFullWidth(true)
+    mainFrame:AddChild(buttonGroup)
+    buttonGroup:ClearAllPoints()
+    buttonGroup:SetPoint("BOTTOMRIGHT",0,0)
+
+    UIHelper:AddButtonToFrame(buttonGroup, "Discord", "BOTTOMRIGHT", function() SN_Report:Show() end, 150)
+    UIHelper:AddButtonToFrame(buttonGroup, "Thats My Bis", "BOTTOMRIGHT", function() SN_Report:Show() end, 150)
+    UIHelper:AddButtonToFrame(buttonGroup, "Reset", "BOTTOMRIGHT", function() SN_ItemTracker:Reset() end, 150)
 end
 
 function SN_ItemList:ForceUpdate()
