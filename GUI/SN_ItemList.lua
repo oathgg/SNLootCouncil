@@ -11,7 +11,7 @@ local function BuildTableContent()
     tableContent = {}
 
     for internalItemId, values in pairs(SN_Item:GetAllItems()) do
-        table.insert(tableContent, { internalItemId, values.ItemID, values.Name, values.Owner })
+        table.insert(tableContent, { internalItemId, values.ItemID, values.Name, values.Owner, values.Note })
     end
 end
 
@@ -21,6 +21,12 @@ local function SN_ITEMLIST_DROPDOWN_CALLBACK(self, arg1, arg2, checked)
     elseif self.value.Key == "Delete" then
         SN:PrintMsg("Removing "..selectedLine.ItemName)
         SN_Item:Delete(selectedLine.InternalItemId)
+        SN_ItemList:ForceUpdate()
+    elseif self.value.Key == "OS" then
+        SN_Item:AssignOS(selectedLine.InternalItemId)
+        SN_ItemList:ForceUpdate()
+    elseif self.value.Key == "Clear OS" then
+        SN_Item:ClearOS(selectedLine.InternalItemId)
         SN_ItemList:ForceUpdate()
     else
         SN_Item:AssignOwner(selectedLine.InternalItemId, self.value.Key)
@@ -42,17 +48,19 @@ local function Update()
                 b.ItemId:SetText(nil)
                 b.Name:SetText(nil)
                 b.Owner:SetText(nil)
+                b.Note:SetText(nil)
             end
             break
         end
 
-        local internalItemId, itemId, itemName, owner = unpack(tableContent[curRowIndex])
+        local internalItemId, itemId, itemName, owner, note = unpack(tableContent[curRowIndex])
         local button = buttons[index]
         
         button.ItemId:SetText(itemId)
         local _, itemLink = GetItemInfo(itemId)
         button.Name:SetText(itemLink)
         button.Owner:SetText(owner)
+        button.Note:SetText(note)
 
         -- https://wowwiki.fandom.com/wiki/UIHANDLER_OnClick
         button:RegisterForClicks("AnyUp")
@@ -73,6 +81,12 @@ local function Update()
                             ["Disenchant"] = {},
                             ["Guild bank"] = {},
                         }
+
+                        if (note == "OS") then
+                            options["Clear OS"] = {}
+                        else
+                            options["OS"] = {}
+                        end
 
                         UIHelper:CreateSimpleDropdownMenu(s, level, options, SN_ITEMLIST_DROPDOWN_CALLBACK) 
                     end, "MENU")
@@ -108,7 +122,8 @@ local function CreateTableHeader()
     TableHelper:CreateColumns(header, { 
         { "ItemId", 70 }, 
         { "Name", 150 }, 
-        { "Owner", 150 },
+        { "Owner", 120 },
+        { "Note", 50 },
     }, nil)
 
     return header

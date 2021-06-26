@@ -6,7 +6,7 @@ function SN_Item:New(itemName, itemLink)
 
     local itemLinkSplit = { strsplit(":", itemLink) }
     local wowItemID = itemLinkSplit[2] or 0
-    SAVED_ALL_ITEMS[internalItemId] = { ItemID = wowItemID, Name = itemName, Owner = nil }
+    SAVED_ALL_ITEMS[internalItemId] = { ItemID = wowItemID, Name = itemName, Owner = nil, Note = nil }
 
     return internalItemId
 end
@@ -18,6 +18,18 @@ end
 function SN_Item:AssignOwner(internalItemId, ownerName)
     if SAVED_ALL_ITEMS[internalItemId] then
         SAVED_ALL_ITEMS[internalItemId].Owner = ownerName
+    end
+end
+
+function SN_Item:AssignOS(internalItemId)
+    if SAVED_ALL_ITEMS[internalItemId] then
+        SAVED_ALL_ITEMS[internalItemId].Note = "OS"
+    end
+end
+
+function SN_Item:ClearOS(internalItemId)
+    if SAVED_ALL_ITEMS[internalItemId] then
+        SAVED_ALL_ITEMS[internalItemId].Note = ""
     end
 end
 

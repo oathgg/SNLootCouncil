@@ -19,9 +19,15 @@
 					</Anchors>
 				</FontString>
 				<FontString parentKey="Owner" inherits="GameFontHighlightSmall" justifyH="LEFT">
-					<Size x="150"/>
+					<Size x="120"/>
 					<Anchors>
 						<Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeKey="$parent.Name"/>
+					</Anchors>
+				</FontString>
+				<FontString parentKey="Note" inherits="GameFontHighlightSmall" justifyH="LEFT">
+					<Size x="50"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeKey="$parent.Owner"/>
 					</Anchors>
 				</FontString>
 			</Layer>
