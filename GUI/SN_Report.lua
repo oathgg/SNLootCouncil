@@ -48,8 +48,6 @@ local function GenerateThatsMyBisText()
     local lines = "character,date,itemID,itemName,note"
 
     for internalItemId, values in pairs(SN_Item:GetAllItems()) do
-        print (values.Owner)
-
         if not (string.IsEmpty(values.Owner)) then 
             lines = lines.."\n"
             -- Owner
