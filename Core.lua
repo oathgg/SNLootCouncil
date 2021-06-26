@@ -15,6 +15,10 @@ function string.EndsWith(str, ending)
     return ending == "" or str:sub(-#ending) == ending
 end
 
+function string.IsEmpty(s)
+    return s == nil or s == ''
+end
+
 -- By changing these values we change how the core of the product works.
 -- This value indicates the minimum item rarity before we assign it to the item list
 -- https://wowwiki.fandom.com/wiki/API_TYPE_Quality
