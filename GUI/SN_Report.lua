@@ -49,18 +49,20 @@ local function GenerateThatsMyBisText()
 
     for internalItemId, values in pairs(SN_Item:GetAllItems()) do
         if not (string.IsEmpty(values.Owner)) then 
-            lines = lines.."\n"
-            -- Owner
-            lines = lines..values.Owner
-            -- Date
-            lines = lines..','..date("%y/%m/%d")
-            -- ItemId
-            lines = lines..','..values.ItemID
-            -- Item name
-            lines = lines..','..values.Name
-            -- Note
-            if not (string.IsEmpty(values.Note)) then
-                lines = lines..','..values.Note
+            if (values.Owner ~= "Disenchant" and values.Owner ~= "Guild bank") then
+                lines = lines.."\n"
+                -- Owner
+                lines = lines..values.Owner
+                -- Date
+                lines = lines..','..date("%y/%m/%d")
+                -- ItemId
+                lines = lines..','..values.ItemID
+                -- Item name
+                lines = lines..','..values.Name
+                -- Note
+                if not (string.IsEmpty(values.Note)) then
+                    lines = lines..','..values.Note
+                end
             end
         end
     end
