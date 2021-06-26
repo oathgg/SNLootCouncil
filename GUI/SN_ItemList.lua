@@ -123,24 +123,11 @@ local function CreateGUI()
     mainFrame:SetTitle("SNLootCouncil")
     mainFrame:EnableResize(false)
 
-    local reportBtn = AceGUI:Create("Button")
-    reportBtn:SetText("Report")
-    reportBtn:SetCallback("OnClick", function() SN_Report:Show() end)
-
-    local resetBtn = AceGUI:Create("Button")
-    resetBtn:SetText("Reset")
-    resetBtn:SetCallback("OnClick", function() 
-        SN_ItemTracker:Reset() 
-    end)
-
     CreateTable()
 
-    mainFrame:AddChildren(reportBtn, resetBtn)
-    resetBtn:ClearAllPoints()
-    resetBtn:SetPoint("BOTTOMRIGHT",0,0)
-
-    reportBtn:ClearAllPoints()
-    reportBtn:SetPoint("BOTTOMLEFT",0,0)
+    UIHelper:AddButtonToFrame(mainFrame, "Discord", "BOTTOMRIGHT", function() SN_Report:Show() end, 150)
+    UIHelper:AddButtonToFrame(mainFrame, "Thats My Bis", "BOTTOMRIGHT", function() SN_Report:Show() end, 150)
+    UIHelper:AddButtonToFrame(mainFrame, "Reset", "BOTTOMRIGHT", function() SN_ItemTracker:Reset() end, 150)
 end
 
 function SN_ItemList:ForceUpdate()

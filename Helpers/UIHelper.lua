@@ -71,3 +71,18 @@ function UIHelper:CreateSimpleDropdownMenu(self, level, menuItems, callback, has
         end
     end 
 end
+
+function UIHelper:AddButtonToFrame(mainFrame, text, position, callback, width, height)
+    local btn = AceGUI:Create("Button")
+    btn:SetText(text)
+    btn:SetCallback("OnClick", callback)
+    if width then
+        btn:SetWidth(width)
+    end
+    if height then
+        btn:SetHeight(height)
+    end
+    mainFrame:AddChild(btn)
+    btn:ClearAllPoints()
+    btn:SetPoint(position,0,0)
+end

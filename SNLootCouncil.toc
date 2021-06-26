@@ -1,6 +1,6 @@
-## Interface: 11305
+## Interface: 20501
 ## Title: Supernova Loot Council
-## Author: Okrah - Skullflame EU
+## Author: Lokrah - Skullflame EU
 ## Version: 1.0.0
 # SavedVariablesPerCharacter: 
 ## SavedVariables: SAVED_ALL_ITEMS, SNLootCouncilDB
