@@ -11,7 +11,7 @@ local function BuildTableContent()
     tableContent = {}
 
     for internalItemId, values in pairs(SN_Item:GetAllItems()) do
-        table.insert(tableContent, { internalItemId, values.Name, values.Owner })
+        table.insert(tableContent, { internalItemId, values.ItemID, values.Name, values.Owner })
     end
 end
 
@@ -39,15 +39,17 @@ local function Update()
         if curRowIndex > rowCount then
             local b = buttons[index]
             if b then
+                b.ItemId:SetText(nil)
                 b.Name:SetText(nil)
                 b.Owner:SetText(nil)
             end
             break
         end
 
-        local internalItemId, itemName, owner = unpack(tableContent[curRowIndex])
+        local internalItemId, itemId, itemName, owner = unpack(tableContent[curRowIndex])
         local button = buttons[index]
         
+        button.ItemId:SetText(itemId)
         button.Name:SetText(itemName)
         button.Owner:SetText(owner)
 
@@ -92,8 +94,9 @@ local function CreateTableHeader()
     local header = TableHelper:CreateHeader(mainFrame)
 
     TableHelper:CreateColumns(header, { 
-        { "Name", 200 }, 
-        { "Owner", 250 },
+        { "ItemId", 70 }, 
+        { "Name", 150 }, 
+        { "Owner", 150 },
     }, nil)
 
     return header
@@ -132,8 +135,8 @@ local function CreateGUI()
     buttonGroup:ClearAllPoints()
     buttonGroup:SetPoint("BOTTOMRIGHT",0,0)
 
-    UIHelper:AddButtonToFrame(buttonGroup, "Discord", "BOTTOMRIGHT", function() SN_Report:Show() end, 150)
-    UIHelper:AddButtonToFrame(buttonGroup, "Thats My Bis", "BOTTOMRIGHT", function() SN_Report:Show() end, 150)
+    UIHelper:AddButtonToFrame(buttonGroup, "Discord", "BOTTOMRIGHT", function() SN_Report:ShowExport("DISCORD") end, 150)
+    UIHelper:AddButtonToFrame(buttonGroup, "Thats My Bis", "BOTTOMRIGHT", function() SN_Report:ShowExport("THATSMYBIS") end, 150)
     UIHelper:AddButtonToFrame(buttonGroup, "Reset", "BOTTOMRIGHT", function() SN_ItemTracker:Reset() end, 150)
 end
 
@@ -165,8 +168,8 @@ function SN_ItemList:Show()
     end
 end
 
-function SN_ItemList:Add(itemName)
-    SN_Item:New(itemName)
+function SN_ItemList:Add(itemName, itemLink)
+    SN_Item:New(itemName, itemLink)
     SN_ItemList:ForceUpdate()
 end
 

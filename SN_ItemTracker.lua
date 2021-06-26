@@ -62,12 +62,12 @@ end
 
 function OnChatDistribution(...)
     if IS_ENABLED then
-        local itemName = ...
+        local itemName, itemLink = ...
 
         -- In case they also announce the OS in raid warning.
         if itemName ~= PREV_ITEM then
             SN:PrintMsg("Detected item "..itemName)
-            SN_ItemList:Add(itemName)
+            SN_ItemList:Add(itemName, itemLink)
 
             PREV_ITEM = itemName
         end

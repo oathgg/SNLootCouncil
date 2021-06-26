@@ -3,7 +3,7 @@ SN_Report = {}
 local AceGUI = LibStub("AceGUI-3.0")
 local mainFrame = nil
 
-local function GenerateText()
+local function GenerateDiscordText()
     local lines = ""
     local firstLine = true
 
@@ -27,11 +27,55 @@ local function GenerateText()
     return lines
 end
 
-local function GenerateMultiLineEditBox()
+--[[
+
+    First line must contain headers for data (Case sensitive)
+    character,date,itemID,itemName,note
+    Gurgthock,2020-10-01,18821,Quick Strike Ring,That's my BIS
+
+    Supported header fields: (Case Sensitive)
+    player or character (required)
+    itemID or item_id (required)
+    item or itemName or item_name
+    date or dateTime or date_time
+    publicNote or public_note (max 140 chars)
+    officerNote or officer_note + (note and/or votes and/or response) (max 140 chars)
+
+    if note,response,public note, or officer note are equal to OS, offspec flag will be set to true
+
+]]
+local function GenerateThatsMyBisText()
+    local lines = "character,date,itemID,itemName,note"
+
+    for internalItemId, values in pairs(SN_Item:GetAllItems()) do
+        -- An enter, lol.
+        lines = lines.."\n"
+
+        if (values.Owner) then 
+            -- Owner
+            lines = lines..values.Owner
+            -- Date
+            lines = lines..','..date("%y/%m/%d")
+            -- ItemId
+            lines = lines..','..values.ItemID
+            -- Item name
+            lines = lines..','..values.Name
+            -- Note
+        end
+    end
+
+    return lines
+end
+
+local function GenerateMultiLineEditBox(exportType)
     local widget = AceGUI:Create("MultiLineEditBox")
     widget:DisableButton(true)
     widget:SetLabel("")
-    widget:SetText(GenerateText())
+    if (exportType == "DISCORD") then
+        widget:SetText(GenerateDiscordText())
+    elseif (exportType == "THATSMYBIS") then
+        widget:SetText(GenerateThatsMyBisText())
+    end
     widget:SetFocus()
     widget:SetFullWidth(true)
     widget:SetHeight(mainFrame.frame.height - 70)
@@ -39,7 +83,7 @@ local function GenerateMultiLineEditBox()
     mainFrame:AddChild(widget)
 end
 
-local function CreateGUI()
+local function CreateGUI(exportType)
     mainFrame = AceGUI:Create("Frame", UIParent)
     mainFrame:Hide()
     _G["AAA_Report"] = mainFrame
@@ -49,20 +93,19 @@ local function CreateGUI()
     mainFrame:SetTitle("Generated report list")
     mainFrame:EnableResize(false)
 
-    GenerateMultiLineEditBox()
+    GenerateMultiLineEditBox(exportType)
 end
 
-function SN_Report:Show()
+function SN_Report:ShowExport(exportType)
     if mainFrame == nil or not mainFrame:IsShown() then
 
         if SN_Item:GetAllItems() == nil or getn(SN_Item:GetAllItems()) == 0 then
             SN:PrintMsg("There are no items in the list to report.")
         else
             SN:PrintMsg("Generating report...")
-            CreateGUI()
+            CreateGUI(exportType)
             mainFrame:Show()
         end
-
     else
         mainFrame:Hide()
         mainFrame = nil

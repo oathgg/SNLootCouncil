@@ -37,7 +37,7 @@ function SN_ChatReader:ProcessMessage(event, ...)
         
         if itemName and itemRarity >= SN.MinimumItemRarityBeforeProcessing then
             for key, callback in pairs(CALLBACK) do
-                callback(itemName)
+                callback(itemName, itemLink)
             end 
         end
     end

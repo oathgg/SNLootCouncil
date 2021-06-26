@@ -1,10 +1,12 @@
 SN_Item = {}
 if SAVED_ALL_ITEMS == nil then SAVED_ALL_ITEMS = {} end
 
-function SN_Item:New(itemName)
+function SN_Item:New(itemName, itemLink)
     local internalItemId = table.getn(SAVED_ALL_ITEMS) + 1 or 1
 
-    SAVED_ALL_ITEMS[internalItemId] = { Name = itemName, Owner = nil }
+    local itemLinkSplit = { strsplit(":", itemLink) }
+    local wowItemID = itemLinkSplit[2] or 0
+    SAVED_ALL_ITEMS[internalItemId] = { ItemID = wowItemID, Name = itemName, Owner = nil }
 
     return internalItemId
 end

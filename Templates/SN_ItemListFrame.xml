@@ -9,11 +9,17 @@
 				</Texture>
 			</Layer>
 			<Layer level="ARTWORK">
+				<FontString parentKey="ItemId" inherits="GameFontHighlightSmall" justifyH="LEFT">
+					<Size x="70"/>
+				</FontString>
 				<FontString parentKey="Name" inherits="GameFontHighlightSmall" justifyH="LEFT">
-					<Size x="200"/>
+					<Size x="150"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeKey="$parent.ItemId"/>
+					</Anchors>
 				</FontString>
 				<FontString parentKey="Owner" inherits="GameFontHighlightSmall" justifyH="LEFT">
-					<Size x="250"/>
+					<Size x="150"/>
 					<Anchors>
 						<Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeKey="$parent.Name"/>
 					</Anchors>
