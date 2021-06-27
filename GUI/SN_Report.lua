@@ -54,15 +54,13 @@ local function GenerateThatsMyBisText()
                 -- Owner
                 lines = lines..values.Owner
                 -- Date
-                lines = lines..','..date("%y/%m/%d")
+                lines = lines..','..date("%Y-%m-%d")
                 -- ItemId
                 lines = lines..','..values.ItemID
                 -- Item name
                 lines = lines..','..values.Name
                 -- Note
-                if not (string.IsEmpty(values.Note)) then
-                    lines = lines..','..values.Note
-                end
+                lines = lines..','..(values.Note or "")
             end
         end
     end
