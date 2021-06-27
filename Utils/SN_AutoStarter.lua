@@ -1,5 +1,4 @@
 local SN_AutoStarterEvents = CreateFrame("frame")
-local CombatLogEnabled = false
 
 function SN_AutoStarterEvents.PLAYER_ENTERING_WORLD(...)
     local inInstance, instanceType = IsInInstance()
@@ -7,19 +6,13 @@ function SN_AutoStarterEvents.PLAYER_ENTERING_WORLD(...)
         local instanceName, _, _, _, _ = GetInstanceInfo()
         SN_ItemTracker:Start()
         SN:PrintMsg("Player entered "..instanceName)
-        
-        if (not CombatLogEnabled) then
-            SN:PrintMsg("Combat logging started.")
-            LoggingCombat(true)
-            CombatLogEnabled = true
-        end
+        SN:PrintMsg("Combat logging started.")
+        LoggingCombat(true)
     else
         SN_ItemTracker:Stop()
 
-        if (CombatLogEnabled) then
-            SN:PrintMsg("Combat logging stopped.")
-            LoggingCombat(false)
-        end
+        SN:PrintMsg("Combat logging stopped.")
+        LoggingCombat(false)
     end
 end
 
