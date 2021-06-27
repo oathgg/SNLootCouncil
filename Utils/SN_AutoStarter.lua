@@ -8,7 +8,7 @@ function SN_AutoStarterEvents.PLAYER_ENTERING_WORLD(...)
         SN_ItemTracker:Start()
         SN:PrintMsg("Player entered "..instanceName)
         
-        if (-not CombatLogEnabled) then
+        if (not CombatLogEnabled) then
             SN:PrintMsg("Combat logging started.")
             LoggingCombat(true)
             CombatLogEnabled = true
