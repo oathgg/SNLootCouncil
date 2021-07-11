@@ -6,11 +6,13 @@ function SN_AutoStarterEvents.PLAYER_ENTERING_WORLD(...)
         local instanceName, _, _, _, _ = GetInstanceInfo()
         SN:PrintMsg("Player entered "..instanceName)
         SN_ItemTracker:Start()
-        
-        SN:PrintMsg("Combat logging started.")
-        LoggingCombat(true)
+        C_Timer.After(20, function () 
+            SN:PrintMsg("Combat logging started.")
+            LoggingCombat(true)
+        end)
     else
         SN_ItemTracker:Stop()
+
         LoggingCombat(false)
     end
 end
