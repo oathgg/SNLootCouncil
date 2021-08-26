@@ -121,8 +121,8 @@ local function CreateTableHeader()
 
     TableHelper:CreateColumns(header, { 
         { "ItemId", 70 }, 
-        { "Name", 150 }, 
-        { "Owner", 120 },
+        { "Name", 180 }, 
+        { "Owner", 90 },
         { "Note", 50 },
     }, nil)
 
@@ -196,8 +196,10 @@ function SN_ItemList:Show()
 end
 
 function SN_ItemList:Add(itemName, itemLink)
-    SN_Item:New(itemName, itemLink)
+    local internalItemId = SN_Item:New(itemName, itemLink)
     SN_ItemList:ForceUpdate()
+
+    return internalItemId
 end
 
 function SN_ItemList:Reset()

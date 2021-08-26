@@ -13,13 +13,13 @@
 					<Size x="70"/>
 				</FontString>
 				<FontString parentKey="Name" inherits="GameFontHighlightSmall" justifyH="LEFT">
-					<Size x="150"/>
+					<Size x="180"/>
 					<Anchors>
 						<Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeKey="$parent.ItemId"/>
 					</Anchors>
 				</FontString>
 				<FontString parentKey="Owner" inherits="GameFontHighlightSmall" justifyH="LEFT">
-					<Size x="120"/>
+					<Size x="90"/>
 					<Anchors>
 						<Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeKey="$parent.Name"/>
 					</Anchors>

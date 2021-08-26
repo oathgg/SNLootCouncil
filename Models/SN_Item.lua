@@ -3,9 +3,18 @@ if SAVED_ALL_ITEMS == nil then SAVED_ALL_ITEMS = {} end
 
 function SN_Item:New(itemName, itemLink)
     local internalItemId = table.getn(SAVED_ALL_ITEMS) + 1 or 1
+    
+    -- If we dont have an item link then we need to generate one from the itemName
+    if (itemLink == nil) then
+        _, itemLink = GetItemInfo(itemName)
+    end
 
     local itemLinkSplit = { strsplit(":", itemLink) }
     local wowItemID = itemLinkSplit[2] or 0
+
+    --print ("wowItemID: " .. wowItemID)
+    --print ("itemName: " .. itemName)
+
     SAVED_ALL_ITEMS[internalItemId] = { ItemID = wowItemID, Name = itemName, Owner = nil, Note = nil }
 
     return internalItemId

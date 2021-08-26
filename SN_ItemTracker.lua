@@ -49,8 +49,7 @@ function OnItemMLDistribution(...)
         -- BUG:: In case we somehow didn't catch the raid warning we will create it again.
         if not itemId then
             SN:PrintMsg("Couldn't find '"..itemName.."', creating item.")
-            SN_ItemList:Add(itemName)
-            itemId = SN_Item:GetItemByNameWithoutOwner(itemName)
+            itemId = SN_ItemList:Add(itemName)
         end
 
         Distribute(itemId, itemName, targetPlayer)
