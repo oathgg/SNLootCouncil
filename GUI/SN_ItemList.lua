@@ -58,7 +58,7 @@ local function Update()
         
         button.ItemId:SetText(itemId)
         local _, itemLink = GetItemInfo(itemId)
-        button.Name:SetText(itemLink)
+        button.Name:SetText(itemName)
         button.Owner:SetText(owner)
         button.Note:SetText(note)
 
@@ -150,7 +150,7 @@ local function CreateGUI()
     _G["AAAA_ItemList"] = mainFrame
     tinsert(UISpecialFrames, "AAAA_ItemList")	-- allow ESC close
     mainFrame:SetWidth(500)
-    mainFrame:SetTitle("SNLootCouncil")
+    mainFrame:SetTitle("Loot")
     mainFrame:EnableResize(false)
 
     CreateTable()

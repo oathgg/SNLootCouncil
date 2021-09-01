@@ -1,4 +1,4 @@
-## Interface: 20501
+## Interface: 20502
 ## Title: Supernova Loot Council
 ## Author: Lokrah - Skullflame EU
 ## Version: 1.0.0
